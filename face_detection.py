@@ -1,33 +1,29 @@
-
-import cv2
 import numpy as np
-from matplotlib import pyplot as plt
-import glob
+import cv2
 
-txtfiles = []
-for file in glob.glob("*.jpg"):
-	txtfiles.append(file)
+face_cascade = cv2.CascadeClassifier('./cascade/haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier('./cascade/haarcascade_eye.xml')
 
-for ix in txtfiles:
-	img = cv2.imread(ix, cv2.IMREAD_COLOR)
-	imgtest1 = img.copy()
-	imgtest = cv2.cvtColor(imgtest1, cv2.COLOR_BGR2GRAY)
-	facecascade = cv2.CascadeClassifier(
-		'D:\\KJ\\Nagesh\\Downloads\\face_recognition\\haarcascade_frontalface_default.xml')
-eye_cascade = cv2.CascadeClassifier('D:\\KJ\\Nagesh\\Downloads\\face_recognition\\haarcascade_eye.xml')
+cap = cv2.VideoCapture(0)
 
-faces = facecascade.detectMultiScale(imgtest, scaleFactor=1.2, minNeighbors=5)
+while 1:
+    ret, img = cap.read()
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-print('TotalnumberofFacesfound', len(faces))
+    for (x,y,w,h) in faces:
+        cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+        roi_gray = gray[y:y+h, x:x+w]
+        roi_color = img[y:y+h, x:x+w]
 
-for (x, y, w, h) in faces:
-		face_detect = cv2.rectangle(imgtest, (x, y), (x + w, y + h), (255, 0, 255), 2)
-		roi_gray = imgtest[y:y + h, x:x + w]
-		roi_color = imgtest[y:y + h, x:x + w]
-		plt.imshow(face_detect)
-		eyes = eye_cascade.detectMultiScale(roi_gray)
-		for (ex, ey, ew, eh) in eyes:
-			eye_detect = cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (255, 0, 255), 2)
-			plt.imshow(eye_detect)
+        eyes = eye_cascade.detectMultiScale(roi_gray)
+        for (ex,ey,ew,eh) in eyes:
+            cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 
+    cv2.imshow('img',img)
+    k = cv2.waitKey(30) & 0xff
+    if k == 27:
+        break
 
+cap.release()
+cv2.destroyAllWindows()
