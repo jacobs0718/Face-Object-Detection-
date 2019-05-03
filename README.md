@@ -50,6 +50,6 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
-#Additional Resources
+# Additional Resources
 https://pythonprogramming.net/haar-cascade-face-eye-detection-python-opencv-tutorial/
 
