@@ -11,7 +11,7 @@ eye_cascade = cv2.CascadeClassifier('./cascade/haarcascade_eye.xml')
 number_of_frame = 0
 
 while True:
-    ret, frame = cap.read()
+    _, frame = cap.read()
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
