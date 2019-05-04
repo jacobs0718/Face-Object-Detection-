@@ -10,7 +10,7 @@ Face/Object Detection using Python and OpenCV
 1. Run pip install -r requirements.txt
 
 # Using
-0. cap = cv2.VideoCapture(0) - 0 stands for camera number, if you have more thank 1 camera, you should change the number to use other camera.
+0. cap = cv2.VideoCapture(0) - 0 stands for camera number, if you have more than 1 camera, you should change the number to use other camera.
 
 1. Run face_detection.py with python3 - python3 face_detection.py
 
