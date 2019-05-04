@@ -6,6 +6,9 @@ Face/Object Detection using Python and OpenCV
 2. Python 3.x (3.4+)
 3. Numpy package (for example, using pip install numpy command).
 
+# Installation
+1. Run pip install -r requirements.txt
+
 # Cascade Detection in OpenCV
 First we need to load the required XML classifiers.
 
