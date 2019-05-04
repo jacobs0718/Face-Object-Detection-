@@ -18,20 +18,17 @@ eye_cascade = cv2.CascadeClassifier('./cascade/haarcascade_eye.xml')
 Now we find the faces in the image. If faces are found, it returns the positions of detected faces as Rectangle(x,y,w,h). Once we get these locations, we can create a ROI for the face and apply eye detection on this ROI. Finally, we are cropping face and saving in 'faces/' folder. 
 
 ```py
-    for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y), (x + w, y + h) ,(255 ,0 ,0) ,2)
-        roi_gray = gray[y: y + h, x: x + w]
-        roi_color = frame[y: y + h, x: x + w]
 
-        eyes = eye_cascade.detectMultiScale(roi_gray)
-        success, image = cap.read()
-        crop_img = image[y: y + h, x: x + w]
+for (x, y, w, h) in faces:
+    cv2.rectangle(frame, (x, y), (x + w, y + h) ,(255 ,0 ,0) ,2)
+    roi_gray = gray[y: y + h, x: x + w]
+    roi_color = frame[y: y + h, x: x + w]
 
-        cv2.imwrite(f"./faces/frame{number_of_frame}.jpg", crop_img)
-        number_of_frame += 1
+    eyes = eye_cascade.detectMultiScale(roi_gray)
+    success, image = cap.read()
+    crop_img = image[y: y + h, x: x + w]
 
-        for (ex, ey, ew, eh) in eyes:
-            cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0,255,0), 2)
+    cv2.imwrite(f"./faces/frame{number_of_frame}.jpg", crop_img)
 
 ```
 
