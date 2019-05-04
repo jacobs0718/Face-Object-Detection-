@@ -9,6 +9,12 @@ Face/Object Detection using Python and OpenCV
 # Installation
 1. Run pip install -r requirements.txt
 
+# Using
+0. cap = cv2.VideoCapture(0) - 0 stands for camera number, if you have more thank 1 camera, you should change the number to use other camera.
+
+1. Run face_detection.py with python3 - python3 face_detection.py
+
+
 # Cascade Detection in OpenCV
 First we need to load the required XML classifiers.
 
@@ -34,6 +40,8 @@ for (x, y, w, h) in faces:
     cv2.imwrite(f"./faces/frame{number_of_frame}.jpg", crop_img)
 
 ```
+
+ 
 
 # Additional Resources
 https://pythonprogramming.net/haar-cascade-face-eye-detection-python-opencv-tutorial/
